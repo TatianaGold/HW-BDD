@@ -1,10 +1,7 @@
 package ru.netology.test;
 
-import lombok.val;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
-import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -32,7 +29,6 @@ public class MoneyTransferTest {
         assertEquals(expectedFirstCardBalance, cardBalance.getCardBalance(cardInfoFirst));
         assertEquals(expectedSecondCardBalance, cardBalance.getCardBalance(cardInfoSecond));
     }
-
     @Test
     void shouldGetErrorMessageIfAmountMoreBalance() {
         var loginPage = open("http://localhost:9999", LoginPage.class);
