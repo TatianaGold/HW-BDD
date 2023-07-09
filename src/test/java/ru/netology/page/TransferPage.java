@@ -16,10 +16,12 @@ public class TransferPage {
     private final SelenideElement transferButton = $("[data-test-id=action-transfer]");
     private final SelenideElement amountInput = $("[data-test-id='amount'] [type='text']");
     private final SelenideElement fromInput = $("[data-test-id=from] [type='tel']");
-    private final SelenideElement transferHead = $(withText("Пополнение карты"));
     private final SelenideElement errorMessage = $("[data-test-id=error-notification]");
 
-    public TransferPage() { transferHead.shouldBe(Condition.visible, ofSeconds(10));}
+    public TransferPage() {
+        SelenideElement transferHead = $(withText("Пополнение карты"));
+        transferHead.shouldBe(Condition.visible, ofSeconds(10));
+    }
 
     public DashboardPage validTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
         amountInput.setValue(amountToTransfer);
@@ -27,13 +29,6 @@ public class TransferPage {
         transferButton.click();
         return new DashboardPage();
     }
-
-    public void makeTransfer(String amountToTransfer, DataHelper.CardInfo cardInfo) {
-        amountInput.setValue(amountToTransfer);
-        fromInput.setValue(cardInfo.getCardNumber());
-        transferButton.click();
-    }
-
     public void findErrorMessage(String expectedText) {
         errorMessage.shouldHave(exactText(expectedText), Duration.ofSeconds(20)).shouldBe(visible);
     }
