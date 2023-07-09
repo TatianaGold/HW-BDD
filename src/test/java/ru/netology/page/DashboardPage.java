@@ -1,11 +1,10 @@
 package ru.netology.page;
 
-import com.codeborne.selenide.Condition;
+import static com.codeborne.selenide.Condition.text;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 import ru.netology.data.DataHelper;
-
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -20,7 +19,7 @@ public class DashboardPage {
     }
 
     public int getCardBalance(DataHelper.CardInfo cardInfo) {
-        val text = cards.findBy(Condition.text(cardInfo.getCardNumber().substring(15))).getText();
+        val text = cards.findBy(text(cardInfo.getCardNumber().substring(15))).getText();
         return extractBalance(text);
     }
 

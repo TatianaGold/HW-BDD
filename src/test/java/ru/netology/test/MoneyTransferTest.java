@@ -16,7 +16,7 @@ public class MoneyTransferTest {
 
     @BeforeEach
     void  setup(){
-        var loginPage = open("http://localhost:9999", LoginPage.class);
+        loginPage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCode();
@@ -46,7 +46,7 @@ public class MoneyTransferTest {
         var amount = generateInvalidAmount(secondCardBalance);
         var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
         transferPage.validTransfer(String.valueOf(amount),secondCardInfo);
-        transferPage.findErrorMessage("Выполнена попытка перевода суммы,превышающей остаток на карте списания");
+        transferPage.findErrorMessage("Недостаточно средств на счету");
         var actualBalanceFirstCard = dashboardPage.getCardBalance(firstCardInfo);
         var actualBalanceSecondCard = dashboardPage.getCardBalance(secondCardInfo);
         assertEquals(firstCardBalance,actualBalanceFirstCard);
